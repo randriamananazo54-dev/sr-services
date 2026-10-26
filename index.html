@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14251f">
+  <meta name="description" content="SR Services — gestion des services de nettoyage, horaires et rapports.">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./style.css">
+  <title>SR SERVICES</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="SR Services accueil"><span class="brand-mark">SR</span><span><strong>SR SERVICES</strong><small>Propreté · Confiance · Excellence</small></span></a>
+    <button id="installBtn" class="icon-button" hidden aria-label="Installer l’application">＋</button>
+  </header>
+  <main>
+    <section class="welcome">
+      <p class="eyebrow">ESPACE DE TRAVAIL</p>
+      <h1>Bonjour !</h1>
+      <p class="muted">Tout votre service, au même endroit.</p>
+      <label class="role-label" for="roleSelect">Aperçu du rôle</label>
+      <select id="roleSelect" aria-label="Choisir un aperçu de rôle">
+        <option value="admin">Administrateur</option>
+        <option value="employee">Employé</option>
+        <option value="client">Client</option>
+      </select>
+    </section>
+
+    <section id="stats" class="stats" aria-label="Résumé"></section>
+    <section class="section-heading"><div><p class="eyebrow">AUJOURD’HUI</p><h2 id="scheduleTitle">Planning des services</h2></div><span class="date-chip" id="todayDate"></span></section>
+    <section id="jobs" class="job-list"></section>
+
+    <section class="quick-actions" id="quickActions">
+      <button class="action-card" id="clockBtn"><span class="action-icon">◷</span><span><strong>Pointage</strong><small id="clockState">Commencer la journée</small></span><span class="arrow">›</span></button>
+      <button class="action-card" id="reportBtn"><span class="action-icon">▤</span><span><strong>Rapport de service</strong><small>Préparer un compte rendu</small></span><span class="arrow">›</span></button>
+      <button class="action-card" id="messageBtn"><span class="action-icon">✉</span><span><strong>Messages</strong><small>Contacter l’administration</small></span><span class="arrow">›</span></button>
+    </section>
+
+    <section class="notice"><span class="notice-icon">i</span><p><strong>Version de démarrage</strong><br>Cette interface est un prototype. Les comptes, données réelles, photos, géolocalisation et synchronisation Supabase ne sont pas encore activés.</p></section>
+  </main>
+  <nav class="bottom-nav" aria-label="Navigation principale">
+    <button class="nav-item active" data-target="home"><span>⌂</span>Accueil</button>
+    <button class="nav-item" id="navSchedule"><span>▦</span>Planning</button>
+    <button class="nav-item" id="navReports"><span>▤</span>Rapports</button>
+    <button class="nav-item" id="navProfile"><span>◉</span>Profil</button>
+  </nav>
+  <dialog id="appDialog">
+    <form method="dialog" class="dialog-content">
+      <button class="close-button" aria-label="Fermer">×</button>
+      <p class="eyebrow">SR SERVICES</p><h2 id="dialogTitle">Information</h2><p id="dialogText" class="muted"></p>
+      <label id="dialogLabel" for="dialogInput">Détail</label>
+      <textarea id="dialogInput" rows="4" placeholder="Écrire ici…"></textarea>
+      <button id="dialogSubmit" class="primary-button" value="confirm">Enregistrer dans cette démonstration</button>
+      <p class="fine-print">Démo uniquement : rien n’est envoyé ni sauvegardé sur un serveur.</p>
+    </form>
+  </dialog>
+  <footer>© <span id="year"></span> SR SERVICES</footer>
+  <script src="./app.js"></script>
+</body>
+</html>
