@@ -1,61 +1,46 @@
 <!doctype html>
 <html lang="fr-CA">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#17392e">
-  <meta name="description" content="SR SERVICES — une expérience élégante pour gérer les services de nettoyage, les horaires et les rapports.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="stylesheet" href="./style.css">
-  <title>SR SERVICES | Espace de travail</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17392e"><meta name="description" content="SR SERVICES — gestion professionnelle du nettoyage et des interventions.">
+<meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="./manifest.json"><link rel="stylesheet" href="./style.css">
+<title>SR SERVICES | Gestion professionnelle</title>
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="#" aria-label="SR Services accueil"><span class="brand-mark">SR</span><span><strong>SR SERVICES</strong><small>Propreté · Confiance · Excellence</small></span></a>
-    <button id="installBtn" class="icon-button" hidden aria-label="Installer l’application" title="Installer l’application">＋</button>
-  </header>
-  <main>
-    <section class="welcome">
-      <p class="eyebrow">VOTRE ESPACE PRIVILÉGIÉ</p>
-      <h1>Bonjour, bienvenue.</h1>
-      <p class="muted">Une gestion simple et soignée de vos services, de vos équipes et de votre quotidien.</p>
-      <label class="role-label" for="roleSelect">Afficher l’espace</label>
-      <select id="roleSelect" aria-label="Choisir un aperçu de rôle">
-        <option value="admin">Administration</option>
-        <option value="employee">Espace employé</option>
-        <option value="client">Espace client</option>
-      </select>
-    </section>
-    <section id="stats" class="stats" aria-label="Résumé de l’activité"></section>
-    <section class="section-heading"><div><p class="eyebrow">VUE D’ENSEMBLE</p><h2 id="scheduleTitle">Planning des services</h2></div><span class="date-chip" id="todayDate"></span></section>
-    <section id="jobs" class="job-list" aria-live="polite"></section>
-    <section class="section-heading" style="margin-top:32px"><div><p class="eyebrow">À PORTÉE DE MAIN</p><h2>Actions rapides</h2></div></section>
-    <section class="quick-actions" id="quickActions">
-      <button class="action-card" id="clockBtn"><span class="action-icon">◷</span><span><strong>Pointage</strong><small id="clockState">Commencer la journée</small></span><span class="arrow">›</span></button>
-      <button class="action-card" id="reportBtn"><span class="action-icon">▤</span><span><strong>Rapport de service</strong><small>Préparer un compte rendu</small></span><span class="arrow">›</span></button>
-      <button class="action-card" id="messageBtn"><span class="action-icon">✉</span><span><strong>Messages</strong><small>Contacter l’administration</small></span><span class="arrow">›</span></button>
-    </section>
-    <section class="notice"><span class="notice-icon">i</span><p><strong>Version de démonstration</strong><br>Les écrans permettent de prévisualiser les espaces. Les comptes réels, la sauvegarde des données, les photos et la synchronisation Supabase doivent encore être configurés avant une utilisation en production.</p></section>
-  </main>
-  <nav class="bottom-nav" aria-label="Navigation principale">
-    <button class="nav-item active" data-target="home"><span>⌂</span>Accueil</button>
-    <button class="nav-item" id="navSchedule"><span>▦</span>Planning</button>
-    <button class="nav-item" id="navReports"><span>▤</span>Rapports</button>
-    <button class="nav-item" id="navProfile"><span>◉</span>Profil</button>
-  </nav>
-  <dialog id="appDialog">
-    <form method="dialog" class="dialog-content">
-      <button class="close-button" aria-label="Fermer">×</button>
-      <p class="eyebrow">SR SERVICES · ESPACE PRIVÉ</p><h2 id="dialogTitle">Information</h2><p id="dialogText" class="muted"></p>
-      <label id="dialogLabel" for="dialogInput">Détail</label>
-      <textarea id="dialogInput" rows="4" placeholder="Écrire ici…"></textarea>
-      <button id="dialogSubmit" class="primary-button" value="confirm">Confirmer</button>
-      <p class="fine-print">Démo uniquement : rien n’est envoyé ni sauvegardé sur un serveur.</p>
-    </form>
-  </dialog>
-  <footer>© <span id="year"></span> SR SERVICES · Conçu avec soin</footer>
-  <script src="./app.js"></script>
-</body>
-</html>
+<aside class="sidebar">
+ <a class="brand" href="#"><span class="brand-mark">SR</span><span><strong>SR SERVICES</strong><small>GESTION & EXCELLENCE</small></span></a>
+ <div class="workspace-label">ESPACE DE TRAVAIL</div>
+ <label class="role-caption" for="roleSelect">Profil actif</label>
+ <select id="roleSelect" class="role-select"><option value="admin">Administration</option><option value="employee">Espace employé</option><option value="client">Espace client</option></select>
+ <nav class="side-nav" aria-label="Navigation principale">
+  <button class="side-link active" data-scroll="overview"><span>⌂</span> Tableau de bord</button>
+  <button class="side-link" id="navSchedule"><span>▦</span> Planning <i>03</i></button>
+  <button class="side-link" id="navReports"><span>▤</span> Rapports</button>
+  <button class="side-link" id="navProfile"><span>◉</span> Mon profil</button>
+ </nav>
+ <div class="sidebar-bottom"><div class="support-icon">✧</div><strong>Un service impeccable.</strong><p>Une gestion organisée pour une expérience client irréprochable.</p><span class="version-pill"><span></span> Aperçu interactif</span></div>
+ <div class="side-footer">© <span id="year"></span> SR SERVICES<br><small>Propreté · Confiance · Excellence</small></div>
+</aside>
+<header class="mobile-header"><a class="brand" href="#"><span class="brand-mark">SR</span><span><strong>SR SERVICES</strong><small>GESTION & EXCELLENCE</small></span></a><button id="installBtn" class="icon-button" hidden aria-label="Installer l’application">＋</button></header>
+<main id="overview" class="app-main">
+ <div class="page-top"><div><p class="eyebrow">VOTRE ESPACE PRIVILÉGIÉ</p><h1 id="greeting">Bonjour, bienvenue.</h1><p class="page-subtitle">Voici ce qui se passe chez SR SERVICES aujourd’hui.</p></div><div class="top-actions"><span class="secure-chip"><span></span> Espace de démonstration</span><button class="profile-chip" id="profileTop"><span class="avatar">SR</span><span><b>SR Services</b><small id="roleName">Administration</small></span><span class="chevron">⌄</span></button></div></div>
+ <section class="hero-panel">
+  <div class="hero-copy"><span class="hero-tag"><span class="sparkle">✦</span> L’EXCELLENCE AU QUOTIDIEN</span><h2>Le détail fait<br><em>toute la différence.</em></h2><p>Gardez le contrôle sur vos interventions, vos équipes et la qualité de chaque service.</p><button id="heroAction" class="hero-button">Explorer le planning <span>↗</span></button></div>
+  <div class="hero-art" aria-hidden="true"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-disc"><span class="art-spark">✧</span><span class="art-letter">S</span><span class="art-small">SERVICE<br>EXCELLENCE</span></div><div class="art-leaf leaf-one">❧</div><div class="art-leaf leaf-two">❧</div><span class="art-caption">SOIGNÉ AVEC ATTENTION</span></div>
+  <div class="hero-bottom"><span>✦ Un service sur lequel vous pouvez compter</span><span id="heroDate"></span></div>
+ </section>
+ <section id="stats" class="stats" aria-label="Indicateurs clés"></section>
+ <div class="content-grid">
+  <section class="panel schedule-panel"><div class="panel-heading"><div><p class="eyebrow">ORGANISATION</p><h2 id="scheduleTitle">Planning des services</h2><p class="panel-subtitle">Suivez les interventions et leur avancement.</p></div><span class="date-chip" id="todayDate"></span></div><div class="schedule-legend"><span><i class="legend-dot green"></i> Confirmé</span><span><i class="legend-dot gold"></i> En attente</span></div><div id="jobs" class="job-list" aria-live="polite"></div><button class="outline-button" id="allJobs">Voir le planning complet <span>→</span></button></section>
+  <aside class="right-column"><section class="panel performance-panel"><div class="panel-heading compact"><div><p class="eyebrow">APERÇU D’ACTIVITÉ</p><h2 id="performanceTitle">Votre semaine</h2></div><span class="mini-icon">↗</span></div><div class="performance-total" id="performanceTotal">12 <small>services planifiés</small></div><div class="chart" aria-label="Graphique illustratif de l’activité"><div class="chart-grid"><div class="chart-col"><span style="height:36%"></span><small>Lun</small></div><div class="chart-col"><span style="height:60%"></span><small>Mar</small></div><div class="chart-col"><span style="height:44%"></span><small>Mer</small></div><div class="chart-col"><span style="height:83%"></span><small>Jeu</small></div><div class="chart-col today"><span style="height:68%"></span><small>Ven</small></div><div class="chart-col"><span style="height:34%"></span><small>Sam</small></div><div class="chart-col"><span style="height:18%"></span><small>Dim</small></div></div></div><p class="chart-note"><span>✦</span> Aperçu illustratif — données de démonstration</p></section>
+  <section class="panel actions-panel"><div class="panel-heading compact"><div><p class="eyebrow">ACCÈS RAPIDE</p><h2>Que souhaitez-vous faire ?</h2></div></div><div class="quick-actions" id="quickActions"><button class="action-card" id="clockBtn"><span class="action-icon">◷</span><span class="action-copy"><strong>Pointage</strong><small id="clockState">Commencer la journée</small></span><span class="action-arrow">↗</span></button><button class="action-card" id="reportBtn"><span class="action-icon">▤</span><span class="action-copy"><strong>Rapport de service</strong><small>Préparer un compte rendu</small></span><span class="action-arrow">↗</span></button><button class="action-card" id="messageBtn"><span class="action-icon">✉</span><span class="action-copy"><strong>Messagerie</strong><small>Contacter votre équipe</small></span><span class="action-arrow">↗</span></button></div></section>
+  <section class="quality-card"><div class="quality-icon">✧</div><div><strong>La qualité avant tout</strong><p>Chaque intervention compte. Merci de faire partie de l’équipe SR SERVICES.</p></div></section>
+ </aside>
+ </div>
+ <section class="notice"><span class="notice-icon">i</span><p><strong>Version de démonstration</strong><br>Les informations affichées sont fictives. Les comptes sécurisés, les sauvegardes, les photos et la synchronisation Supabase doivent être configurés avant utilisation réelle.</p></section>
+ <footer>© <span id="footerYear"></span> SR SERVICES <span>·</span> Pensé pour un service d’exception</footer>
+</main>
+<nav class="mobile-nav" aria-label="Navigation mobile"><button class="mobile-nav-link active" data-scroll="overview"><span>⌂</span>Accueil</button><button class="mobile-nav-link" id="mobileSchedule"><span>▦</span>Planning</button><button class="mobile-nav-link" id="mobileReports"><span>▤</span>Rapports</button><button class="mobile-nav-link" id="mobileProfile"><span>◉</span>Profil</button></nav>
+<dialog id="appDialog"><form method="dialog" class="dialog-content"><button class="close-button" aria-label="Fermer">×</button><p class="eyebrow">SR SERVICES · ESPACE PRIVÉ</p><h2 id="dialogTitle">Information</h2><p id="dialogText" class="muted"></p><label id="dialogLabel" for="dialogInput">Détail</label><textarea id="dialogInput" rows="4" placeholder="Écrire ici…"></textarea><button id="dialogSubmit" class="primary-button" value="confirm">Confirmer</button><p class="fine-print">Démo uniquement : rien n’est envoyé ni sauvegardé sur un serveur.</p></form></dialog>
+<script src="./app.js"></script>
+</body></html>
