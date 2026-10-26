@@ -1,0 +1,23 @@
+const $=s=>document.querySelector(s);
+const roleSelect=$("#roleSelect"),stats=$("#stats"),jobs=$("#jobs"),dialog=$("#appDialog");
+let clockedIn=false;
+const data={
+ admin:{stats:[["4","Services aujourd’hui"],["6","Employés actifs"],["12","Clients suivis"]],jobs:[["⌂","Résidence Beaulieu","09:00 · Val-d’Or","Équipe : Sarah M.","Confirmé"],["▦","Bureaux Pro Défi","11:30 · Val-d’Or","Équipe : Équipe nettoyage","Confirmé"],["◇","Nettoyage en profondeur","14:00 · Val-d’Or","Équipe : À assigner","À assigner"]]},
+ employee:{stats:[["3","Services prévus"],["1","Rapport à faire"],["0","Incident signalé"]],jobs:[["⌂","Résidence Beaulieu","09:00 · Adresse à confirmer","Client : Démo","Confirmé"],["▦","Bureaux Pro Défi","11:30 · Adresse à confirmer","Client : Démo","Confirmé"]]},
+ client:{stats:[["2","Services à venir"],["1","Rapport disponible"],["0","Messages non lus"]],jobs:[["⌂","Nettoyage résidentiel","Mardi · 09:00","Équipe assignée après confirmation","Confirmé"],["▦","Nettoyage des vitres","Vendredi · 13:00","Équipe assignée après confirmation","En attente"]]}
+};
+function render(){const role=roleSelect.value,d=data[role];stats.innerHTML=d.stats.map(x=>'<article class="stat-card"><div class="stat-number">'+x[0]+'</div><div class="stat-label">'+x[1]+'</div></article>').join("");$("#scheduleTitle").textContent=role==="client"?"Mes prochains services":"Planning des services";jobs.innerHTML=d.jobs.map((j,i)=>'<article class="job-card"><div class="job-icon">'+j[0]+'</div><div><h3>'+j[1]+'</h3><div class="job-meta">'+j[2]+'<br>'+j[3]+'</div></div><div class="job-footer"><span class="status '+(j[4]==="En attente"||j[4]==="À assigner"?"pending":"")+'">'+j[4]+'</span><button class="text-button" data-job="'+i+'">Détails →</button></div></article>').join("");$("#clockBtn").hidden=role==="client";$("#reportBtn").hidden=role==="client";$("#messageBtn").querySelector("small").textContent=role==="client"?"Contacter SR SERVICES":"Contacter l’administration";jobs.querySelectorAll("[data-job]").forEach(b=>b.addEventListener("click",()=>openDialog("Détails du service","Cette fiche est un exemple. La fiche réelle affichera les consignes, l’adresse et les informations autorisées par votre compte.","Ajouter une note")));$("#clockState").textContent=clockedIn?"Pointage démarré (démo)":"Commencer la journée";}
+function openDialog(title,text,label="Message"){ $("#dialogTitle").textContent=title;$("#dialogText").textContent=text;$("#dialogLabel").textContent=label;$("#dialogInput").value="";dialog.showModal();}
+roleSelect.addEventListener("change",render);
+$("#clockBtn").addEventListener("click",()=>{clockedIn=!clockedIn;$("#clockState").textContent=clockedIn?"Pointage démarré (démo)":"Commencer la journée";openDialog(clockedIn?"Pointage démarré":"Pointage terminé",clockedIn?"Démo : le pointage n’est pas envoyé au serveur.":"Démo : l’heure de fin n’est pas enregistrée sur un serveur.");});
+$("#reportBtn").addEventListener("click",()=>openDialog("Rapport de service","La version complète permettra d’ajouter le travail effectué, les observations et les photos avant/après.","Notes du rapport"));
+$("#messageBtn").addEventListener("click",()=>openDialog("Nouveau message","Cette messagerie de démonstration n’envoie aucun message.","Votre message"));
+$("#navSchedule").addEventListener("click",()=>$("#scheduleTitle").scrollIntoView({behavior:"smooth",block:"start"}));
+$("#navReports").addEventListener("click",()=>openDialog("Rapports de service","Les rapports réels seront accessibles après connexion à Supabase."));
+$("#navProfile").addEventListener("click",()=>openDialog("Profil","Les informations personnelles et les permissions seront liées au compte sécurisé."));
+$("#dialogSubmit").addEventListener("click",e=>{e.preventDefault();dialog.close();const v=$("#dialogInput").value.trim();if(v)openDialog("Démo terminée","Votre texte n’a pas été envoyé ni sauvegardé. La connexion serveur sera ajoutée ensuite.");});
+$("#todayDate").textContent=new Intl.DateTimeFormat("fr-CA",{day:"numeric",month:"short"}).format(new Date());
+$("#year").textContent=new Date().getFullYear();
+let installPrompt;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e;$("#installBtn").hidden=false;});$("#installBtn").addEventListener("click",async()=>{if(installPrompt){installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;$("#installBtn").hidden=true;}else openDialog("Installer SR SERVICES","Dans le menu du navigateur, choisissez « Ajouter à l’écran d’accueil ».");});
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+render();
