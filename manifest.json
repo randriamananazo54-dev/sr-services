@@ -1,0 +1,11 @@
+{
+  "name": "SR SERVICES",
+  "short_name": "SR SERVICES",
+  "description": "Application de gestion des services de nettoyage",
+  "lang": "fr-CA",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f7f6f1",
+  "theme_color": "#14251f"
+}
